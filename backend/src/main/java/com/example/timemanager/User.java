@@ -18,10 +18,11 @@ public class User {
     private String email;
     private String password;
 
-    public User(){};
+    public User(){}
 
 
     public User(String firstName, String userName, String email, String password) {
+
         this.firstName = firstName;
         this.userName = userName;
         this.email = email;
@@ -46,14 +47,15 @@ public class User {
         this.firstName = firstName;
     }
 
+    //this gets the username
     public String getUserName() {
         return userName;
     }
-
+    //this sets the username
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
+    //this gets the email
     public String getEmail() {
         return email;
     }

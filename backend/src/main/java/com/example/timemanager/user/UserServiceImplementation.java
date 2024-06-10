@@ -19,37 +19,44 @@ public class UserServiceImplementation implements UserService {
         return userRepository.findById(id).orElseThrow(
                 ()
                         -> new NoSuchElementException(
-                        "NO CUSTOMER PRESENT WITH ID = " + id));
+                        "NO USER PRESENT WITH ID = " + id));
     }
 
-    public String addUser(User user)
-    {
-        User existingUser = userRepository.findById(user.getId())
-                .orElseThrow(null);
-        if(existingUser == null){
-            userRepository.save(user);
-            return "User created successfully";
-        }
-        else {
+
+    public String addUser(User user) {
+        // Check if user already exists
+        if (userRepository.existsById(user.getId())) {
             throw new UserAlreadyExistsException("User already exists");
         }
+        // Create and save the user
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return "User created successfully";
     }
 
-    public String updateUser(User user){
-        User existingUser = userRepository.findById(user.getId()).orElseThrow(null);
-        if(existingUser == null){
-            throw new UserAlreadyExistsException("No such user exists");
-        }
-        else{
-            existingUser.setUserName(user.getUserName());
-            existingUser.setEmail(user.getEmail());
-            existingUser.setFirstName(user.getFirstName());
-            existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
-            userRepository.save(existingUser);
-            return "Record update succesfully";
-        }
+    public String updateUser(User user) {
+        User existingUser = userRepository.findById(user.getId())
+                .orElseThrow(() -> new NoSuchElementException("No such user exists"));
+
+        existingUser.setUserName(user.getUserName());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(existingUser);
+        return "Record updated successfully";
     }
 
 
+    public Iterable<User> getAllUsers(){
+        return userRepository.findAll();
+    }
 
+    public String deleteUser(Integer id){
+        if(userRepository.existsById(id)){
+            userRepository.deleteById(id);
+            return "User successfully deleted";
+        } else {
+            throw new NoSuchElementException("No user with given ID: " + id);
+        }
+    }
 }

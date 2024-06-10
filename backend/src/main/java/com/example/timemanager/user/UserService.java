@@ -9,5 +9,9 @@ public interface UserService {
 
     String updateUser(User user);
 
+    Iterable<User> getAllUsers();
+
+    String deleteUser(Integer id);
+
 
 }
