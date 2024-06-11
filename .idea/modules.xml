@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TimeManagerSpring.iml" filepath="$PROJECT_DIR$/TimeManagerSpring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/TimeManager.iml" filepath="$PROJECT_DIR$/.idea/TimeManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/TimeManagerSpring.iml" filepath="$PROJECT_DIR$/backend/TimeManagerSpring.iml" />
     </modules>
   </component>
 </project>

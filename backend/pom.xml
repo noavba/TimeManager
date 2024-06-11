@@ -103,19 +103,14 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.github.eirslett</groupId>
-			<artifactId>frontend-plugin-core</artifactId>
-			<version>1.15.0</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>5.7.0</version> <!-- Use the appropriate version -->
+			<version>6.3.0</version> <!-- Use the appropriate version -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>5.5.4</version>
+			<version>6.3.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
