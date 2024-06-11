@@ -1,5 +1,6 @@
-package com.example.timemanager;
+package com.example.timemanager.user;
 
+import com.example.timemanager.user.User;
 import com.example.timemanager.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

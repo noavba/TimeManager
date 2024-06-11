@@ -1,4 +1,4 @@
-package com.example.timemanager;
+package com.example.timemanager.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

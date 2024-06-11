@@ -1,7 +1,5 @@
 package com.example.timemanager.user;
 
-import com.example.timemanager.User;
-import com.example.timemanager.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,6 +10,7 @@ import java.util.NoSuchElementException;
 public class UserServiceImplementation implements UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public User getUser(Integer id)
