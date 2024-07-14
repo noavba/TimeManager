@@ -1,4 +1,4 @@
-package com.example.timemanager.user;
+package com.example.timemanager.controllers;
 
 import com.example.timemanager.user.User;
 import com.example.timemanager.user.UserService;
@@ -6,17 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path="api/users")
 public class UserController {
     @Autowired
     private UserService userService;
-    //private UserRepository userRepository;
-    //TODO: Figure out how to implement it so that username has to be unique (no duplicates) --
-    //TODO: Figure out how to create and link to front end
 
-    //TODO: web sessions?
-    //TODO: Time manager - post/task creation >?
-
+    //TODO: Unique Emails and gather firstname/hours goal details when creating accounts
+    //TODO: start learning about JWT sessions
+    //TODO: Create Tasks/Etc
     @GetMapping(path="/all")
     public Iterable<User> getAllUsers(){
         return userService.getAllUsers();
@@ -45,5 +43,10 @@ public class UserController {
     @GetMapping("/ping")
     public String ping() {
         return "pong";
+    }
+
+    @PutMapping("/{id}/addHoursGoal")
+    public String addHoursGoal(@PathVariable("id") Integer id, @RequestBody Integer hoursGoal){
+        return userService.addHoursGoal(id, hoursGoal);
     }
 }

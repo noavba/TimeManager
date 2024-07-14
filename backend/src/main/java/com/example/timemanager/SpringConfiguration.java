@@ -16,14 +16,20 @@ import static java.util.Objects.nonNull;
 @Configuration
 public class SpringConfiguration implements WebMvcConfigurer {
 
+    //TODO: FUCKING FIX THE GOD DAMN REGISTRATION I AM LOSING MY GOID DAMNM MINHD WHY IS 401?
+    
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         this.serveDirectory(registry, "/", "classpath:/static/");
     }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**")
-                .allowedOriginPatterns("*");
+        registry.addMapping("/**") // This applies to all endpoints
+                .allowedOriginPatterns("http:/localhost:5173") // Be cautious with this in production
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 
     private void serveDirectory(ResourceHandlerRegistry registry, String endpoint, String location) {

@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import PingTest from "./components/PingTest.tsx";
-import Login from "./components/Login.tsx";
+import PingTest from "./pages/PingTest.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
+import RegisterPage from "./pages/RegisterPage.tsx";
+import HomePage from "./pages/HomePage.tsx";
 
 const router = createBrowserRouter([
     {
@@ -21,8 +23,17 @@ const router = createBrowserRouter([
     },
     {
         path: '/login',
-        element: <Login />
+        element: <LoginPage />
+    },
+    {
+        path:'/register',
+        element: <RegisterPage/>
+    },
+    {
+        path:'/homePage',
+        element:<HomePage/>
     }
+
 
 ]);
 

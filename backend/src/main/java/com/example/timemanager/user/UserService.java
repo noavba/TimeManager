@@ -11,5 +11,11 @@ public interface UserService {
 
     String deleteUser(Integer id);
 
+    String addHoursGoal(Integer id , Integer hoursGoal);
+
+    User registerUser(User user);
+
+
+
 
 }

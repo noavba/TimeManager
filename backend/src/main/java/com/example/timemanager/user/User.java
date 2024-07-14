@@ -1,11 +1,12 @@
 package com.example.timemanager.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.timemanager.roles.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Objects;
+import java.util.*;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
@@ -14,22 +15,40 @@ public class User {
     private Integer id;
 
     private String firstName;
-    private String userName;
+
+    @Column(unique = true, nullable = false)
+    private String username;
+
     private String email;
+
+    @JsonIgnore
     private String password;
+
+    private Integer hoursGoal;
 
     public User(){}
 
 
-    public User(String firstName, String userName, String email, String password) {
+    public User(String firstName, String userName, String email, String password, Integer hoursGoal, Enum Role) {
 
         this.firstName = firstName;
-        this.userName = userName;
+        this.username = userName;
         this.email = email;
         this.password = password;
+        this.hoursGoal = hoursGoal;
+        // KEEP WORKING ON HOURS GOALO
 
     }
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(  name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
 
     public Integer getId() {
         return id;
@@ -48,12 +67,12 @@ public class User {
     }
 
     //this gets the username
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
     //this sets the username
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
     //this gets the email
     public String getEmail() {
@@ -72,6 +91,12 @@ public class User {
         this.password = password;
     }
 
+    public Integer getHoursGoal(){
+        return hoursGoal;
+    }
+    public void setHoursGoal(Integer hoursGoal){
+        this.hoursGoal = hoursGoal;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,13 +104,20 @@ public class User {
         User user = (User) o;
         return Objects.equals(id, user.id) &&
                 Objects.equals(firstName, user.firstName) &&
-                Objects.equals(userName, user.userName) &&
-                Objects.equals(password, user.password);
+                Objects.equals(username, user.username) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(hoursGoal, user.hoursGoal);
     }
 
     // hashCode method override
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, userName, email, password);
+        return Objects.hash(id, firstName, username, email, password, hoursGoal);
     }
+
+
+    public void setRoles(Set<Role> roles){
+        this.roles=roles;
+    }
+
 }
